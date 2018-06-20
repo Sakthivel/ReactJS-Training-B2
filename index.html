@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>::ReactJS Assignment::</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style>
+    .title {
+        text-align: center;
+        padding: 20px 0;
+    }
+    .container {
+        background: #f9f9f9;
+        padding: 20px 0;
+     }
+    .form-outer, .issue-form-outer {
+        margin: 50px auto;
+        width: 50%;
+    }
+    .result {
+        margin: 50px auto;
+        width: 75%;
+    }
+    .error-msg {
+        text-align: center;
+    }
+    .list {
+        padding: 10px 0;
+    }
+    .hidden {
+        display: none;
+    }
+    footer {
+        margin-top: 100px;
+    }
+    .footer-title {
+        text-align: center;
+    }
+    .repo-name {
+       padding: 0 20px 0 0;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <header><h2 class="title">Login Page</h2></header>
+    <div class="error-msg hidden">Server Error</div>
+    <div class="container">
+        <form>
+            <div class="form-outer">
+                
+                    <div class="form-group" id="userlogin">
+                        <label>Username</label>
+                        <input type="text" id="username" class="form-control" placeholder="Github Username">
+                    </div>
+                    <button type="submit" class="btn btn-primary login">Login</button>
+                
+            </div>
+            <div class="result hidden"></div>
+            <div class="issue-form-outer hidden">
+            
+                    <div class="form-group" id="issue">
+                        <label>Issue Title</label>
+                        <input type="text" id="issueTitle" class="form-control" placeholder="Title">
+                        <label>Issue Description</label>
+                        <input type="text" id="issueDescription" class="form-control" placeholder="Description">
+                        <input type="hidden" id="user" value="">
+                        <input type="hidden" id="repos" value="">
+                    </div>
+                    <button type="submit" class="btn btn-primary add-issue-form">Creat an Issue</button>
+            
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <hr/>
+        <div class="footer-title">ReactJS Assignment</div>
+    </footer>
+</div>
+<script>
+    $(".btn-primary.login").click(function(event) {
+        var username = $('#username').val();
+        //var username = 'pramithprakash';
+        if (username) {
+            formSubmit(username);
+        }
+        event.preventDefault();
+    });
+
+    $(".btn-primary.add-issue-form").on('click', addIssueForm);
+
+    function addIssue(event) {
+        var $el = $(event.currentTarget);
+        $('.result').addClass('hidden');
+        $('.issue-form-outer').removeClass('hidden');
+        
+        $('#user').val($el.data('name'));
+        $('#repos').val($el.data('repo'));
+    }
+
+    function addIssueForm() {
+        $('.result').addClass('hidden');
+        var title = $('#issueTitle').val();
+        var description = $('#issueDescription').val();
+        var user = $('#user').val();
+        var repo = $('#repos').val();
+        if (title && description) {
+            issueSubmit(title, description, user, repo);
+        }
+        event.preventDefault();
+    }
+
+    
+
+    function issueSubmit(title, description, user, repo) {
+        $.ajax({
+            type: 'POST',
+            url: 'https://api.github.com/repos/' + user + '/' + repo + '/issues',
+            data: { "title": title, "body": description },
+            headers: {"Content-Type":'application/json', "Authorization": '6505d64eff8570079661889573b737eb1bb676dx' }
+        }).done(function(data){
+             $('.result').removeClass('hidden');
+             $('.issue-form-outer').addClass('hidden');
+        }).fail(function(){
+            $('.error-msg').removeClass('hidden');
+        });
+    }
+
+    function formSubmit(username) {
+        $.ajax({
+            type: 'GET',
+            url: 'https://api.github.com/users/' + username + '/repos'
+        }).done(function(data){
+            var resultHtml = '<table>';
+                $('.result').removeClass('hidden');
+                $('.form-outer').addClass('hidden');
+                $.each(data, function(key,val) {
+                   resultHtml += '<tr><td class="repo-name">' + data[key].name + '</td><td><button type="button" data-name="'+ username +'" data-repo="' + data[key].name + '" class="btn btn-outline-danger btn-sm add-issue">Add Issue</button></td></tr>';
+                });
+                resultHtml += '</table>';
+
+                $('.result').append(resultHtml);
+                $(".add-issue").on('click', addIssue);
+                
+        }).fail(function(){
+            $('.error-msg').removeClass('hidden');
+        });
+    }
+    
+</script>
+</body>
+</html>
+
