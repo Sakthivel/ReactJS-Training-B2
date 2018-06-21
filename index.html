@@ -8,6 +8,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <style>
+    body {
+        font-size: 12px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: normal;
+    }
     .title {
         text-align: center;
         padding: 20px 0;
@@ -20,7 +25,7 @@
         margin: 50px auto;
         width: 50%;
     }
-    .result {
+    .result, .issue-list {
         margin: 50px auto;
         width: 75%;
     }
@@ -40,7 +45,28 @@
         text-align: center;
     }
     .repo-name {
-       padding: 0 20px 0 0;
+       padding: 10px 20px 20px;
+       border-bottom: 1px solid #cccccc;
+    }
+    .issue-description {
+        padding: 5px 15px 10px;
+    }
+    .backBtn {
+        padding-top: 10px;
+    }
+    .repo-name span, .details span, .reposname {
+        font-size: 14px;
+        color: black;
+        font-weight: bold;
+    }
+    .reponame {
+        padding: 15px 0;
+        text-align: center;
+        font-size: 16px;
+    }
+    form label {
+        padding: 10px 0;
+        font-size: 14px;
     }
 </style>
 </head>
@@ -56,10 +82,11 @@
                         <label>Username</label>
                         <input type="text" id="username" class="form-control" placeholder="Github Username">
                     </div>
-                    <button type="submit" class="btn btn-primary login">Login</button>
+                    <button type="submit" class="btn btn-primary login">Get Repository</button>
                 
             </div>
             <div class="result hidden"></div>
+            <div class="issue-list hidden"></div>
             <div class="issue-form-outer hidden">
             
                     <div class="form-group" id="issue">
@@ -70,10 +97,11 @@
                         <input type="hidden" id="user" value="">
                         <input type="hidden" id="repos" value="">
                     </div>
-                    <button type="submit" class="btn btn-primary add-issue-form">Creat an Issue</button>
+                    <button type="submit" class="btn btn-primary add-issue-form">Creat an Issue</button>&nbsp;<button type="button" class="btn btn-primary back-result">Back</button>
             
             </div>
         </form>
+            
     </div>
 
     <footer>
@@ -82,9 +110,9 @@
     </footer>
 </div>
 <script>
+    
     $(".btn-primary.login").click(function(event) {
         var username = $('#username').val();
-        //var username = 'pramithprakash';
         if (username) {
             formSubmit(username);
         }
@@ -92,18 +120,27 @@
     });
 
     $(".btn-primary.add-issue-form").on('click', addIssueForm);
+    $(".back-result").on('click', backtoResult);
 
     function addIssue(event) {
         var $el = $(event.currentTarget);
-        $('.result').addClass('hidden');
-        $('.issue-form-outer').removeClass('hidden');
+        hideRepos();
+        issueFormShow();
         
         $('#user').val($el.data('name'));
         $('#repos').val($el.data('repo'));
     }
 
+    function viewIssue(event) {
+        var $el = $(event.currentTarget);
+        hideRepos();
+        issueListShow();
+        issueView($el.data('name'), $el.data('repo'));
+    }
+
     function addIssueForm() {
-        $('.result').addClass('hidden');
+        hideRepos();
+        $('h2.title').text('Add issue form');
         var title = $('#issueTitle').val();
         var description = $('#issueDescription').val();
         var user = $('#user').val();
@@ -114,44 +151,126 @@
         event.preventDefault();
     }
 
-    
+    function backtoResult(){
+        showRepos();
+        issueListHidden();
+    }
+
+    function issueView(user, repo) {
+        $.ajax({
+            type: 'GET',
+            url: 'https://api.github.com/repos/' + user + '/' + repo + '/issues',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "token 6505d64eff8570079661889573b737eb1bb676da");
+            }
+        }).done(function(data){
+            loadIssues(data, repo);
+        }).fail(function(){
+            showError();
+        });
+    }
 
     function issueSubmit(title, description, user, repo) {
         $.ajax({
             type: 'POST',
             url: 'https://api.github.com/repos/' + user + '/' + repo + '/issues',
-            data: { "title": title, "body": description },
-            headers: {"Content-Type":'application/json', "Authorization": '6505d64eff8570079661889573b737eb1bb676dx' }
+            data: JSON.stringify({ "title": title, "body": description }),
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "token 6505d64eff8570079661889573b737eb1bb676da");
+            }
         }).done(function(data){
-             $('.result').removeClass('hidden');
-             $('.issue-form-outer').addClass('hidden');
+            showRepos();
+            issueFormHidden();
         }).fail(function(){
-            $('.error-msg').removeClass('hidden');
+            showError();
         });
     }
 
     function formSubmit(username) {
         $.ajax({
             type: 'GET',
-            url: 'https://api.github.com/users/' + username + '/repos'
+            url: 'https://api.github.com/users/' + username + '/repos',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "token 6505d64eff8570079661889573b737eb1bb676da");
+            }
         }).done(function(data){
-            var resultHtml = '<table>';
-                $('.result').removeClass('hidden');
-                $('.form-outer').addClass('hidden');
-                $.each(data, function(key,val) {
-                   resultHtml += '<tr><td class="repo-name">' + data[key].name + '</td><td><button type="button" data-name="'+ username +'" data-repo="' + data[key].name + '" class="btn btn-outline-danger btn-sm add-issue">Add Issue</button></td></tr>';
-                });
-                resultHtml += '</table>';
-
-                $('.result').append(resultHtml);
-                $(".add-issue").on('click', addIssue);
+            loadRepo(data, username);
                 
         }).fail(function(){
-            $('.error-msg').removeClass('hidden');
+            showError();
         });
+    }
+
+    function loadRepo(data, username) {
+        var resultHtml = '<div class="details">';
+                showRepos();
+                $('.form-outer').addClass('hidden');
+                $.each(data, function(key,val) {
+                   resultHtml += '<div class="repo-name"><p class="reposname">' + data[key].name + '</p><button type="button" data-name="'+ username +'" data-repo="' + data[key].name + '" class="btn btn-outline-danger btn-sm add-issue">Add Issue</button>&nbsp;<button type="button" data-name="'+ username +'" data-repo="' + data[key].name + '" class="btn btn-outline-danger btn-sm view-issue">View Issue</button></div>';
+                });
+                resultHtml += '</div>';
+
+                $('.result').html(resultHtml);
+                $(".add-issue").on('click', addIssue);
+                $(".view-issue").on('click', viewIssue);
+
+    }
+
+    function loadIssues(data, repo) {
+        issueListShow();
+        var resultHtml = '<div class="details"><p class="reponame"><span>' + repo + '</span></p>';
+                $.each(data, function(key,val) {
+                   resultHtml += '<div class="repo-name"><p><span>Issue Title:</span> ' + data[key].title + '</p><div class="issue-description"><span>Issue Description:</span> ' +  data[key].body + '</div></div>';
+                });
+                resultHtml += '<div class="backBtn"><button type="button" class="btn btn-primary back-result">Back</button></div></div>';
+
+                $('.issue-list').html(resultHtml);
+                $(".back-result").on('click', backtoResult);
+                $('h2.title').text('List of Issues');
+    }
+
+    function showError() {
+        $('.error-msg').removeClass('hidden');
+    }
+
+    function showRepos() {
+        $('.result').removeClass('hidden');
+        $('h2.title').text('List of Repositories');
+        hideform();
+        issueListHidden();
+        issueFormHidden();
+    }
+
+    function hideRepos() {
+        $('.result').addClass('hidden');
+    }
+
+    function issueFormHidden() {
+        $('.issue-form-outer').addClass('hidden');
+    }
+
+    function issueFormShow() {
+        $('.issue-form-outer').removeClass('hidden');
+        issueListHidden();
+        hideform();
+        hideRepos();
+    }
+
+    function issueListHidden() {
+        $('.issue-list').addClass('hidden');
+    }
+
+    function issueListShow() {
+        $('.issue-list').removeClass('hidden');
+        hideform();
+        hideRepos();
+        issueFormHidden();
+    }
+
+    function hideform() {
+        $('.form-outer').addClass('hidden');
     }
     
 </script>
 </body>
 </html>
-
