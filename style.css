@@ -1,0 +1,60 @@
+body {
+    font-size: 12px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: normal;
+}
+.title {
+    text-align: center;
+    padding: 20px 0;
+}
+.container {
+    background: #f9f9f9;
+    padding: 20px 0;
+ }
+.form-outer, .issue-form-outer {
+    margin: 50px auto;
+    width: 50%;
+}
+.result, .issue-list {
+    margin: 50px auto;
+    width: 75%;
+}
+.error-msg {
+    text-align: center;
+}
+.list {
+    padding: 10px 0;
+}
+.hidden {
+    display: none;
+}
+footer {
+    margin-top: 100px;
+}
+.footer-title {
+    text-align: center;
+}
+.repo-name {
+   padding: 10px 20px 20px;
+   border-bottom: 1px solid #cccccc;
+}
+.issue-description {
+    padding: 5px 15px 10px;
+}
+.backBtn {
+    padding-top: 10px;
+}
+.repo-name span, .details span, .reposname {
+    font-size: 14px;
+    color: black;
+    font-weight: bold;
+}
+.reponame {
+    padding: 15px 0;
+    text-align: center;
+    font-size: 16px;
+}
+form label {
+    padding: 10px 0;
+    font-size: 14px;
+}
