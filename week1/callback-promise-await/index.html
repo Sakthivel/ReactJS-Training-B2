@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>::Assignment for promises, async and await::</title>
+<style>
+ .wrapper {
+     text-align: center;
+ }
+ button {
+     margin-bottom: 20px;
+     padding: 10px;
+ }
+.circle-promise, .circle-callback, .circle-await {
+    height: 200px;
+    width: 200px;
+    background-color: green;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: none;
+    margin-bottom: 10px;
+}
+.circle span {
+    display: inline-block;
+    margin-top: 33%;
+    font-size: 30px;
+    color: yellow;
+}
+.show {
+    display: block;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="wrapper">
+	<h1>Complete this exercise using callbacks, promises, async / await.</h1>
+	
+    <button class="button-promise">Click Me for Promise exercise!</button>
+	<div class="circle circle-promise">
+		<span></span>
+	</div>
+	<hr/>
+	
+    <button class="button-callback">Click Me for Callback exercise!</button>
+	<div class="circle circle-callback">
+		<span></span>
+	</div>
+	<hr/>
+	
+    <button class="button-await">Click Me for async & await!</button>
+	<div class="circle circle-await">
+		<span></span>
+	</div>
+</div>
+<script>
+ /** Promise Method **/
+    $(".button-promise").on("click", function () {
+        $(".circle-promise").addClass("show");
+        showText();
+    });
+
+/** Callback Method **/
+	$(".button-callback").on("click", function () {
+        $(".circle-callback").addClass("show");
+        showWord(callbackFunction);
+    });
+
+/** Await Method **/
+	$(".button-await").on("click", function () {
+		$(".circle-await").addClass("show");
+		showSentence();
+	});
+
+    var showText = () => {
+        let promise = new Promise(function(resolve, reject) {
+            if ($(".circle-promise").hasClass("show")) { 
+                setTimeout(() => { resolve("HelloWorld Promise!!"); }, 5000) 
+            } else { reject(Error("It broke")); } 
+        }); 
+            
+        promise.then(function(text){ 
+            $(".circle-promise span").text(text);
+        }, function(err){ console.log(err); });
+    }
+
+    var showWord = (callbackFunction) => {
+        if ($(".circle-callback").hasClass("show")) { 
+            setTimeout(() => { callbackFunction("HelloWorld Callback!!"); }, 5000)
+        } else { console.log("error"); }
+    }
+
+    var callbackFunction = (text) => {
+        $(".circle-callback span").text(text);
+    }
+
+    var awaitPromisefunction = () => {
+        return new Promise(function(resolve, reject) { 
+            if ($(".circle-await").hasClass("show")) { 
+                setTimeout(() => { resolve("HelloWorld Async/Await!!"); }, 5000) 
+            } else { reject(Error("It broke")); } 
+        });
+    }
+
+    var showSentence = async () => { 
+        let text = await awaitPromisefunction();
+        $(".circle-await span").text(text);
+    }
+</script>
+</body>
+</html> 
