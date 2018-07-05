@@ -1,0 +1,106 @@
+React B2 Training Required Software:
+    IDE - VS Code
+        Emmet (https://emmet.io/), JShint, w3Validator
+    Node - 8.X
+    NPM - 6.X
+
+    System Setup for Windows users not for Mac users:
+   
+    1. Virtual Box version 5.1
+    2. Vagrant (latest version)
+        Dependancy:- https://gitforwindows.org/
+                     https://docs.microsoft.com/en-us/powershell/scripting/setup/installing-windows-powershell?view=powershell-6#upgrading-existing-windows-powershell
+
+    (run `vagrant --version` to check if its installed)
+
+    Next step is to clone this github repo:
+    https://gitlab-sapient.stackroute.in/stackroute-scripts/vagrant-ubuntu-xenial-node-8.git
+
+    You'll get a folder `vagrant-ubuntu-xenial-node-8`, go inside it, and execute `vagrant up` (this command will download ubuntu 16.04, so it's going to take some time ~ 10-15 mins)
+
+    If vagrant up executed successfully, type `vagrant ssh`, you'll be taken inside the ubuntu linux shell
+
+    Check if nodejs is installed by typing `node -v`, if it's not installed, exit out of the VM by typing `exit` on the shell, and then run `vagrant provision`
+
+    If everything goes well thus far and you are inside your virual machine, change the folder location to `/vagrant` by typing `cd /vagrant`
+
+    Create a workspace directory here try out a simple hello world example. Remember, you can access your editors, only outside the VM. So create a basic html page and save it.
+
+    Install http-server in your VM by typing `sudo npm install -g http-server`
+
+    Finally! serve up your page by typing http-server.
+
+    Windows 10:- virtual box latest 5.2.12 and vagrant version is Vagrant 2.1.1
+    navigate inside the vm by typing `vagrant ssh` - to check
+
+    error: VT-x is disabled in the BIOS for all CPU modes
+        have to enable virtualization in your system, you have to restart and do it under your BIOS settings 
+
+    I have trying to start the vm but says "No bootable mediun found"
+        don't start the vm directily, instead let Vagrant manage that for you. You just need to clone the repository I showed, navigate to it, and type `vagrant up`, it will automatically boot up the virtual machine.
+    
+    Getting permission denied when tried to create workspace under /vagrant
+        try sudo    once you `vagrant ssh` then `cd /vagrant`   then `mkdir workspace`
+        In order to see it in your host machine, you must create it in the `/vagrant` location. This location is shared between your VM and host, so whatever file to change/create/delete here, will be available in your host system as well. And you don't need to use `sudo` to create a directory.
+
+ES6 Tips:
+   var, const and let:-  http://es6-features.org/#Constants
+   Map, filter and reducer:-  https://github.com/raghuprathap/raghuprathap.github.io/blob/master/session.md
+
+   
+
+Javascript Tips:
+    https://www.youtube.com/watch?v=8aGhZQkoFbQ
+
+
+NodeJS Tips:
+    https://github.com/Fawke/chicago-data.git
+
+
+
+Week3 Session Note:
+    1. Reuse function
+    2. Pure function
+
+    1. Functional Programm
+    2. Functional Reactive Programm
+
+imperative (procedural) programming
+
+Guidelines to follow for `Functional Reactive Programming`
+1. Everything should be inside a function
+2. No Closures / Do not access any variable declared outside a function...
+3. Avoid Variable Reassignment & Avoid Mutating Objects / Avoid writing loops
+    - Avoid using let declarations
+    - Learn how to create modified objects from existing objects, without mutation
+    - Use Deep-Freeze
+    - Master Array Iterators
+      - map
+      - forEach
+      - filter
+      - reduce
+      - sort
+4. Write as many pure functions as possible
+  - Should not have any side effects
+    - No Closures
+  - For any given input, it should return the same output
+
+
+  # Design an Interactive movie application with the following features:
+    1. Use only Native JavaScript. No JS Libraries allowed.
+    2. User should be able to search for any movie by name. Results should display the movie title, poster and release date, and any other information you would like to show.
+    3. Result should also provide an add button, to add movies to his lists. By default, only favourites list should be displayed. Data about User's Lists and movies in lists should persist between browser refresh
+    4. User should be able to add, edit and rename lists
+    5. Provide a link in the header, to display users list. When a list is selected, display all movies that are part of the list.
+    6. Use OOP to design classes for Movie, MoviesList
+
+
+## DOM Reference:
+    1. https://youtu.be/0ik6X4DJKCc
+    2. https://www.youtube.com/watch?v=mPd2aJXCZ2g
+    3. https://www.youtube.com/watch?v=wK2cBMcDTss
+    4. https://www.youtube.com/watch?v=i37KVt_IcXw
+
+## ES6 Class Reference:
+    1. https://www.youtube.com/watch?v=T-HGdc8L-7w
+
