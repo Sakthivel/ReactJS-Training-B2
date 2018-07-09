@@ -1,0 +1,49 @@
+
+.header {
+    background: darkkhaki;
+    margin-bottom: 10px;
+}
+.container {
+    background: forestgreen;
+    padding: 20px;
+}
+h2 {
+    display: inline-block;
+    margin-left: 150px;
+}
+.form-wrapper {
+    margin: 0 auto;
+    text-align: center;
+    background: yellowgreen;
+    padding: 25px 0;
+}
+.result-wrapper {
+    background: khaki;
+    padding: 10px 10px 10px 30%;
+}
+.title {
+    font-size: 20px;
+}
+ul {
+    list-style-type: none;
+}
+ul li {
+    font-size: 16px;
+    padding: 5px 0;
+    display: flex;
+    flex-flow: row wrap;
+}
+ul li div {
+    display: inline-block;
+}
+ul li div:first-child {
+   width: 70%;
+}
+.form-inline .form-control {
+    width: 400px;
+    height: 45px;
+    font-size: 20px;
+}
+.form-inline {
+    padding-bottom: 10px;
+}
