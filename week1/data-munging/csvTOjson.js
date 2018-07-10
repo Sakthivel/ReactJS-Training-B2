@@ -47,23 +47,23 @@
     });
 
     let isHeader = true;
-    let isHeaderRow = true;
     let header = [];
-    let headerRow = [];
     let year, primaryType, description, arrest;
     const finalData = {};
     const finalArrestData = {};
 
-    rl.on('line', (line) => { // Read CSV File to create crimeJson which is going hold theft $500 under and above
+    rl.on('line', (line) => { // Read CSV File to create crimeJson and  assault crime result arrested or not.
         if (isHeader) {
             isHeader = false;
             header = line.split(',');
             year = header.indexOf('Year');
             primaryType = header.indexOf('Primary Type');
             description = header.indexOf('Description');
+            arrest = header.indexOf('Arrest');
         } else {
             const row = line.split(',');
             let obj = {};
+            let obj1 = {};
 
             // filteration
             if (row[primaryType] === 'THEFT' &&
@@ -88,6 +88,28 @@
                     }
                 }
             }
+
+            if (row[primaryType] === 'ASSAULT' &&
+                (row[year] >= '2001' && row[year] <= '2018')) {
+                if (row[arrest] == 'true') {
+                    if (finalArrestData[row[year]]) {
+                        finalArrestData[row[year]]['arrested']++;
+                    } else {
+                        obj1['arrested'] = 1;
+                        obj1['notArrested'] = 0;
+                        finalArrestData[row[year]] = obj1;
+                    }
+
+                } else {
+                    if (finalArrestData[row[year]]) {
+                        finalArrestData[row[year]]['notArrested']++;
+                    } else {
+                        obj1['arrested'] = 0;
+                        obj1['notArrested'] = 1;
+                        finalArrestData[row[year]] = obj1;
+                    }
+                }
+            }
         }
         
     }).on('close', () => { // Write Json File for crimeJson which contains theft $500 under and above
@@ -96,47 +118,11 @@
             console.log('Saved!');
             console.timeEnd('Data Muning 1');
         });
-    });
-
-    rl.on('line', (line) => { // Read CSV File to create crimeAssaultJson which is going hold Assault crime result arrested or not
-        if (isHeaderRow) {
-            isHeaderRow = false;
-            headerRow = line.split(',');
-            year = headerRow.indexOf('Year');
-            arrest = headerRow.indexOf('Arrest');
-        } else {
-            const row = line.split(',');
-            let obj = {};
-
-            // filteration
-            if (row[primaryType] === 'ASSAULT' &&
-                (row[year] >= '2001' && row[year] <= '2018')) {
-                if (row[arrest] == 'true') {
-                    if (finalArrestData[row[year]]) {
-                        finalArrestData[row[year]]['arrested']++;
-                    } else {
-                        obj['arrested'] = 1;
-                        obj['notArrested'] = 0;
-                        finalArrestData[row[year]] = obj;
-                    }
-
-                } else {
-                    if (finalArrestData[row[year]]) {
-                        finalArrestData[row[year]]['notArrested']++;
-                    } else {
-                        obj['arrested'] = 0;
-                        obj['notArrested'] = 1;
-                        finalArrestData[row[year]] = obj;
-                    }
-                }
-            }
-        }
-        
-    }).on('close', () => { // Write Json File for crimeAssaultJson which contains Assault crime result arrested or not
         fs.writeFile('./data/output/crimeAssaultJson.json', JSON.stringify(finalArrestData), (error) => {
             if (error) throw error;
             console.log('Saved!');
             console.timeEnd('Data Muning 2');
         });
     });
+    
 })(require);
