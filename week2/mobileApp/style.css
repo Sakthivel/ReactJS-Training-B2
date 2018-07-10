@@ -29,15 +29,18 @@ ul {
 }
 ul li {
     font-size: 16px;
-    padding: 5px 0;
+    padding: 10px 0;
     display: flex;
     flex-flow: row wrap;
 }
-ul li div {
-    display: inline-block;
+.image {
+    width: 15%;
 }
-ul li div:first-child {
-   width: 70%;
+.details {
+    width: 84%;
+}
+ul li div > div {
+   width: 100%;
 }
 .form-inline .form-control {
     width: 400px;
@@ -46,4 +49,16 @@ ul li div:first-child {
 }
 .form-inline {
     padding-bottom: 10px;
+}
+.movie-name {
+    font-weight: bold;
+}
+.movie-name span { 
+        padding-left: 15px;
+        font-weight: normal;
+        font-style: italic;
+}
+li div img {
+    width: 100px;
+    height: 100px;
 }

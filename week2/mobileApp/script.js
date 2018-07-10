@@ -91,17 +91,62 @@ function showRes(lists) {
 
     for (let list in lists){
         let liEle = document.createElement("li");
+        let imgEle = document.createElement("div");
+        let detailEle = document.createElement("div");
+
+        let imgDetailEle = document.createElement("img");
+        let attrSrc = document.createAttribute("src");
+        let altText = document.createAttribute("alt");
+
+        let discriEle = document.createElement("div");
         let titleEle = document.createElement("div");
+        let dateEle = document.createElement("span");
         let actionEle = document.createElement("button");
         let name = document.createTextNode(lists[list].title);
+        let relDate = document.createTextNode(formatDate(lists[list].release_date));
+        let descrip;
+        let descriptText = lists[list].overview;
         let addToFav = document.createTextNode('addToFav');
+
         actionEle.className = "btn btn-success";
         titleEle.className = "movie-name";
+        imgEle.className = "image";
+        detailEle.className = "details";
+        attrSrc.value = "https://image.tmdb.org/t/p/w200" + lists[list].poster_path;
+        altText.value = "Image Missing";
+
+        if (descriptText.length > 241) {
+            descriptText = descriptText.substring(0,240);
+        }
+        descrip = document.createTextNode(descriptText);
+
         titleEle.appendChild(name);
+        dateEle.appendChild(relDate);
+        titleEle.appendChild(dateEle);
+        discriEle.appendChild(descrip);
         actionEle.appendChild(addToFav);
-        liEle.appendChild(titleEle);
-        liEle.appendChild(actionEle);
+
+        imgEle.appendChild(imgDetailEle);
+        imgDetailEle.setAttributeNode(attrSrc);
+        imgDetailEle.setAttributeNode(altText);
+
+        detailEle.appendChild(titleEle);
+        detailEle.appendChild(discriEle);
+        detailEle.appendChild(actionEle);
+
+        liEle.appendChild(imgEle);
+        liEle.appendChild(detailEle);
+
         listsView.appendChild(liEle);
+    }
+
+    function formatDate(input) {
+        let datePart = input.match(/\d+/g),
+            year = datePart[0],
+            month = datePart[1],
+            day = datePart[2];
+
+        return day + '/' + month + '/' + year;
     }
     
     
