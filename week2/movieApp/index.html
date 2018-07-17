@@ -22,14 +22,14 @@
     </header>
 
     <div class="form-wrapper">
-        <form class="form-inline" onsubmit="submitFormAction(event);">
+        <form class="form-inline" id="movieSearch">
             <div class="form-group">
                 <label for="search">Search:</label>
                 <input type="search" class="form-control search-box" id="search" placeholder="Search" name="search" required>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <div class="view-fav"><a class="btn-link" href="">View Fav List</a></div>
+        <div class="view-fav"><a class="btn-link favMovies" href="">View Fav List</a></div>
     </div>
 
 <div class="result-wrapper" style="visibility: hidden;">
@@ -47,33 +47,6 @@
     
 </div>
 <script src="script.js"></script>
-
-
-<div id="map" style="margin:10px 50px;width:80%;height:500px;background:yellow; display: none"></div>
-
-<script>
-    function myMap() {
-        var myLatLng = { lat: 11.0486693, lng: 77.0583717};
-        var mapOptions = {
-            center: myLatLng,
-            zoom: 18
-        }
-        
-
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
- var marker = new google.maps.Marker({ position: myLatLng, map: map, title: 'Murali Engg Works' });
-    }
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRjihiEMn-CX6J_Yhl-mtTu7vMjD_tnU4&callback=myMap"></script> 
-<!--
-To use this code on your website, get a free API key from Google.
-Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
--->
-
-
-
 
 </body>
 
