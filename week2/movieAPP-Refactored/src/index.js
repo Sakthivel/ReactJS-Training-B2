@@ -4,7 +4,7 @@ const render = require('./render');
 
 store.subscribe(() => {
   const g = render(store.getState());
-  console.log('g', g);
+  console.log("g: " + g);
   if(g) document.getElementById('searchResults').appendChild(g);
 });
 
@@ -37,7 +37,7 @@ document.getElementById('searchForm').addEventListener('submit', (event) => {
   searchTerm: "",
   searching: true / false,
   searchResults: [{
-  
+
   }]
 }
 
