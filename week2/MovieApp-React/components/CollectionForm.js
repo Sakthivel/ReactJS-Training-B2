@@ -9,7 +9,7 @@ const AddListHtml = ({id, keyup, change}) =>
       id={"addList" + id}
       placeholder="Add to List"
       list="collections"
-      onKeyUp={keyup}
+      onClick={keyup}
       onChange={change}
       value= "add to fav"
     />
