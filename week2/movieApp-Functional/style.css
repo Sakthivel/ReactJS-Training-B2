@@ -1,0 +1,55 @@
+.header {
+    background: darkkhaki;
+    margin-bottom: 10px;
+}
+.container {
+    background: forestgreen;
+    padding: 20px;
+}
+h2 {
+    display: inline-block;
+    margin-left: 150px;
+}
+.form-wrapper {
+    margin: 0 auto;
+    text-align: center;
+    background: yellowgreen;
+    padding: 25px 0;
+}
+.result-wrapper {
+    background: khaki;
+    padding: 20px;
+}
+.result-wrapper .container {
+    width: 100%;
+}
+.movie-details {
+    width: 68%;
+    padding: 20px;
+}
+
+.form-inline .form-control {
+    width: 400px;
+    height: 45px;
+    font-size: 20px;
+}
+.form-inline {
+    padding-bottom: 10px;
+}
+
+.row {
+    border-bottom: 2px solid yellow;
+}
+.row div {
+    display: inline-block;
+}
+.add-fav {
+    width: 10%;
+    padding: 8px;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+    vertical-align: sub;
+}

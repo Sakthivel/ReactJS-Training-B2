@@ -1,6 +1,6 @@
-// Movie App Script File 
+// Movie App Script File
 class movie {
-    
+
     constructor(Apikey) {
         this._APIKey = Apikey;
         this.favMoviesList = localStorage.getItem('FavMoviesList') ? JSON.parse(localStorage.getItem('FavMoviesList')) : {
@@ -105,7 +105,7 @@ class movie {
             listsView.appendChild(liEle);
 
             if (addListener) {
-                
+
                 let addToFavBtn = document.getElementById("favList_" + lists[list].id);
 
                 addToFavBtn.addEventListener('click', function (e) {
