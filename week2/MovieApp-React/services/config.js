@@ -1,5 +1,5 @@
 const config = {
-  api_key: '3f49e7e1c7d24c5d3c90671d2c124fcd',
+  api_key: '843a0406123e1b0b1048f4f810755a87',
   search_path: 'https://api.themoviedb.org/3/search/movie',
   discover_path: 'https://api.themoviedb.org/3/discover/movie',
   search_params: {
