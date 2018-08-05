@@ -11,12 +11,25 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            notes: ['Introduction to Components', "Testing going..", "Welcome UI Dev"]
+            notes: [
+                {
+                    title: "Note 1",
+                    note: "my first note in my app"
+                },
+                {
+                    title: "Note 2",
+                    note: "my second note in my app"
+                },
+                {
+                    title: "Note 3",
+                    note: "my third note in my app"
+                }
+            ]
         }
     }
-    addNote(note) {
+    addNote(title, note) {
         this.setState({
-            notes: [...this.state.notes, note]
+            notes: [...this.state.notes, {title, note}]
         })
     }
     render() {

@@ -38,7 +38,7 @@ static get propTypes() {
         this.setState({expanded: true});
     }
     handleCreateNote() {
-        this.props.onNew(this.state.note)
+        this.props.onNew(this.state.title, this.state.note)
     }
     render() {
         return <Paper style={styles.paper}>

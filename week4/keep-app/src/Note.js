@@ -14,8 +14,11 @@ export default class Note extends  Component {
         return <Fragment>
         <Card style={styles.card}>
         <CardContent>
+          <Typography variant="title" color="textSecondary">
+            {this.props.value.title}
+          </Typography>
           <Typography color="textSecondary">
-            {this.props.value}
+            {this.props.value.note}
           </Typography>
         </CardContent>
       </Card>

@@ -17,8 +17,8 @@ export default class Notes extends  Component {
     }
     render() {
         return <Grid container spacing={24} style={styles.gridContainer}>
-        {this.props.notes.map(n => <Grid key={n} item sm={4}>
-        <Note value={n}/>
+        {this.props.notes.map(note => <Grid key={note.title} item sm={4}>
+        <Note value={note}/>
         </Grid>
         )}
         </Grid>;
