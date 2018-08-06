@@ -4,36 +4,67 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import TakeANote from './TakeANote';
-import Notes from './Notes';
+import Main from './Main';
+
+const styles = {
+    AppBar: {
+        marginBottom: "20px"
+    }
+}
 
 export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            notes: [
+            projects: [
                 {
-                    title: "Note 1",
-                    note: "my first note in my app"
-                },
-                {
-                    title: "Note 2",
-                    note: "my second note in my app"
-                },
-                {
-                    title: "Note 3",
-                    note: "my third note in my app"
+                    name: "Default Project",
+                    desc: "Description",
+                    id: 'qw2',
+                    notes: [
+                        "hello"
+                    ]
                 }
             ]
         }
     }
-    addNote(title, note) {
+    addProject(name, desc, id) {
         this.setState({
-            notes: [...this.state.notes, {title, note}]
+            projects: [...this.state.projects, {name, desc, id}]
         })
     }
+    createANote(projId, note) {
+        
+        let finalProj = this.state.projects.filter((proj) => {
+            if (projId === proj.id) {
+                if(proj.note) {
+                    proj.note.push(note);
+                } else {
+                    proj.note = [note];
+                }
+            }
+            return proj;
+        });
+
+        console.log(finalProj);
+
+        this.setState(state => {
+            state.projects = finalProj;
+            return state;
+        });
+    }
+    deleteProject(id) {
+        let finalProj = this.state.projects.filter((proj) => {
+            return id !== proj.id;
+        });
+
+        this.setState(state => {
+            state.projects = finalProj;
+            return state;
+        });
+    }
     render() {
-        return <Fragment><AppBar position="static">
+        return <Fragment><AppBar position="static" style={styles.AppBar}>
         <Toolbar variant="dense">
         <IconButton color="inherit" aria-label="Menu">
             <MenuIcon />
@@ -43,8 +74,7 @@ export default class App extends Component {
           </Typography>
         </Toolbar>
       </AppBar>
-      <TakeANote onNew={this.addNote.bind(this)}/>
-      <Notes notes={this.state.notes}/>
+      <Main onNew={this.addProject.bind(this)} projects={this.state.projects} onDelete={this.deleteProject.bind(this)} createNote={this.createANote.bind(this)}/>
       </Fragment>;
     }
 }
