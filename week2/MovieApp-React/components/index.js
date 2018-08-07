@@ -6,8 +6,8 @@ import { searchMovie, storageService, parent, getPopular, getMoviesForList } fro
 import { CollectionList } from "./CollectionForm";
 
 class MovieApp extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     const collectionsList = storageService.getCollectionsListFromLocal();
     this.state = {
       movieData: {
