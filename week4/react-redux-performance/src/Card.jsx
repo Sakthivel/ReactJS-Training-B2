@@ -19,6 +19,18 @@ export default class Card extends Component {
     }
   }
 
+  shouldComponentUpdate(newProps, newState) {
+    if (this.props.data !== newProps.data) {
+      return true;
+    } else if (this.state.editing !== newState.editing) {
+      return true;
+    } else if (this.state.text !== newState.text) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   handleCardClick() {
     this.setState({editing: true})
   }

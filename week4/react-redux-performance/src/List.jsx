@@ -33,7 +33,22 @@ export default class Lists extends Component {
       name: props.data.name
     }
   }
-
+  shouldComponentUpdate(newProps, newState) {
+    if (this.props.data !== newProps.data) {
+      return true;
+    } else if (this.state.addCardText !== newState.addCardText) {
+      return true;
+    } else if (this.state.addingCard !== newState.addingCard) {
+      return true;
+    } else if (this.state.editing !== newState.editing) {
+      return true;
+    } else if (this.state.name !== newState.name) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
   handleAddCardButton() {
     this.setState({addingCard: true});
   }
