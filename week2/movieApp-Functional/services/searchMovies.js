@@ -42,14 +42,7 @@ const searchMovieList = config => (searchTerm, page) => {
 };
 
 const getMoviesList = () => () => {
-  //const pageNumber = page || 1;
-  // const moviesLocal = service.getMoviesFromLocal();
-  // const moviesCollections = service.getMovieMapFromLocal();
-  // const moviesInColleciton = moviesCollections[listName];
-  // const movies = moviesInColleciton.map(item => ((moviesLocal[item]) ? moviesLocal[item] : {}));
-  //
-  // const moviesToShow = movies.slice(moviesPerPage * (pageNumber - 1), moviesPerPage * pageNumber);
-  // const totalPages = Math.ceil(movies.length / moviesPerPage);
+  
   const moviesToShow = JSON.parse(localStorage.getItem(config.fav_storage)) ? JSON.parse(localStorage.getItem(config.fav_storage)) : { results: [] };
 
   return {
@@ -63,4 +56,3 @@ const getMoviesList = () => () => {
 
 export const searchMovie = searchMovieList({ ...config });
 export const getMovieLists = getMoviesList();
-//export const getPopularlists = getPopularList({ ...config });

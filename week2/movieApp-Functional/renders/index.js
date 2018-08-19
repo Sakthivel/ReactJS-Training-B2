@@ -25,10 +25,6 @@ const imgHTML = ({posterPath, title})  => `<div class="image"><img src="${imgBas
 
 
 const getCollectionsListHtml = (list) => {
-  // if (!list) {
-  //   return '<option value="Favourites">Favourites</option>';
-  // }
-  // return list.reduce((accu, item) => `${accu}<option value=${item}>${item}</opiton>`, '');
   return '';
 };
 
