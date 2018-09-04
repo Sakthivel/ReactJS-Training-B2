@@ -48,4 +48,3 @@ store.subscribe(() => {
 });
 
 store.dispatch(action);
-store.dispatch(action);
