@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
-import Card from './Card';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -10,9 +9,6 @@ const styles = {
   listPaper: {
     padding: '0.2em',
     backgroundColor: '#e4e4e4'
-  },
-  children: {
-    margin: '0.5em 0'
   }
 }
 
@@ -20,7 +16,6 @@ export default class Lists extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     onCreateCard: PropTypes.func.isRequired,
-    onCardUpdate: PropTypes.func.isRequired,
     onListUpdate: PropTypes.func.isRequired
   };
 
@@ -63,10 +58,6 @@ export default class Lists extends Component {
     this.setState({addCardText: ''});
   }
 
-  handleCardUpdate(cardId, newValue) {
-    this.props.onCardUpdate(cardId, newValue);
-  }
-
   handleEditList() {
     this.setState({editing: true});
   }
@@ -95,14 +86,7 @@ export default class Lists extends Component {
               ) : this.props.data.name
             }
           </Typography>
-          {this.props.data.cards.map(card => (
-            <Card
-              key={card.id}
-              style={styles.children}
-              data={card}
-              onCardUpdate={this.handleCardUpdate.bind(this, card.id)}
-            />
-          ))}
+          {this.props.children}
           {this.state.addingCard ? (
               <form onSubmit={this.handleCreateCard.bind(this)}>
                 <TextField
