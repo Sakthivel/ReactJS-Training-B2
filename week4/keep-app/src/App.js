@@ -21,7 +21,7 @@ export default class App extends Component {
                     name: "Default Project",
                     desc: "Description",
                     id: 'qw2',
-                    notes: [
+                    note: [
                         "hello"
                     ]
                 }
@@ -34,7 +34,7 @@ export default class App extends Component {
         })
     }
     createANote(projId, note) {
-        
+
         let finalProj = this.state.projects.filter((proj) => {
             if (projId === proj.id) {
                 if(proj.note) {

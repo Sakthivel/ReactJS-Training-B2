@@ -26,8 +26,8 @@ const styles = {
 }
 
 export default class Project extends  Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             open: false,
             note: ''
@@ -72,7 +72,7 @@ export default class Project extends  Component {
         add_circle
         </Icon>
         <DeleteIcon onClick={this.deleteCurrentProject.bind(this, this.props.value.id)}/>
-        <i className = "material-icons">view_list </i>
+        
 
         <Modal
           aria-labelledby="simple-modal-title"
@@ -85,13 +85,13 @@ export default class Project extends  Component {
                 <Typography variant="title" id="modal-title">
                     Add Note
                 </Typography>
-                
+
                 <TextField
                     label="Note"
                     value={this.state.note}
                     fullWidth={true}
                     onChange={this.handleNoteChange.bind(this)}
-                    /> 
+                    />
                     <Button onClick={this.addNote.bind(this)} style={styles.saveButton} color="primary">Add Note</Button>
             </div>
           </Paper>
