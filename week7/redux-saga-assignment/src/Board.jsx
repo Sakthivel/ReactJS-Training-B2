@@ -4,7 +4,7 @@ import axios from 'axios';
 import List from './List';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 const styles = {
   flexContainer: {
@@ -20,9 +20,8 @@ const styles = {
 
 class Board extends Component {
   static propTypes = {
-    id: PropTypes.string.isRequired,
-    currentBoard: PropTypes.number,
-    getCurrentBoard: PropTypes.func
+    dispatch: PropTypes.func.isRequired,
+    currentBoard: PropTypes.object,
   };
 
   constructor(props) {
@@ -35,46 +34,62 @@ class Board extends Component {
   }
 
   componentDidMount() {
-    this.props.getCurrentBoard(this.props.id);
+    this.props.dispatch({
+      type: 'GET_CURRENT_BOARD',
+      boardId: this.props.id
+    })
   }
 
   handleCreateList(event) {
     event.preventDefault();
-    const lists = [...this.state.lists, {
+    const newList = {
       id: Math.random()*879979224,
       name: this.state.addListTitle,
       cards: []
-    }];
+    };
+
+    const lists = [...this.props.currentBoard.lists, newList];
+    this.setState({id:this.props.currentBoard.id});
+    this.setState({name:this.props.currentBoard.name});
 
     this.setState({lists, addListTitle: ''});
+    this.props.currentBoard.lists = lists;
     this.saveBoard();
   }
 
   handleListUpdate(listId, newValue) {
-    const index = this.state.lists.findIndex(list => list.id === listId);
-    const list = this.state.lists[index];
+    const index = this.props.currentBoard.lists.findIndex(list => list.id === listId);
+    const list = this.props.currentBoard.lists[index];
     const newList = Object.assign({}, list, {name: newValue});
-    const lists = [...this.state.lists.slice(0, index), newList, ...this.state.lists.slice(index+1)];
-
+    const lists = [...this.props.currentBoard.lists.slice(0, index), newList, ...this.props.currentBoard.lists.slice(index+1)];
+    
     this.setState({lists});
+    this.setState({id:this.props.currentBoard.id});
+    this.setState({name:this.props.currentBoard.name});
+
+    this.props.currentBoard.lists = lists;
     this.saveBoard();
   }
 
   handleCreateCard(listId, cardText) {
-    const index = this.state.lists.findIndex(list => list.id === listId);
-    const list = this.state.lists[index];
+    const index = this.props.currentBoard.lists.findIndex(list => list.id === listId);
+    const list = this.props.currentBoard.lists[index];
     const cards = [...list.cards, {id: Math.random()*879792374, text: cardText}]
-
+    const currentBoard = {};
     const newList = Object.assign({}, list, {cards});
 
-    const lists = [...this.state.lists.slice(0, index), newList, ...this.state.lists.slice(index+1)];
+    const lists = [...this.props.currentBoard.lists.slice(0, index), newList, ...this.props.currentBoard.lists.slice(index+1)];
     this.setState({lists});
+    this.setState({id:this.props.currentBoard.id});
+    this.setState({name:this.props.currentBoard.name});
+
+    this.props.currentBoard.lists = lists;
     this.saveBoard();
   }
 
   handleCardUpdate(listId, cardId, newValue) {
-    const listIndex = this.state.lists.findIndex(list => list.id === listId);
-    const list = this.state.lists[listIndex];
+    const listIndex = this.props.currentBoard.lists.findIndex(list => list.id === listId);
+    const list = this.props.currentBoard.lists[listIndex];
     const cardIndex = list.cards.findIndex(card => card.id === cardId);
     const card = list.cards[cardIndex];
 
@@ -84,8 +99,12 @@ class Board extends Component {
     const updatedCards = [...list.cards.slice(0, cardIndex), {id: cardId, text: newValue}, ...list.cards.slice(cardIndex+1)];
     const updatedList = Object.assign({}, list, {cards: updatedCards});
 
-    const lists = [...this.state.lists.slice(0, listIndex), updatedList, ...this.state.lists.slice(listIndex+1)];
+    const lists = [...this.props.currentBoard.lists.slice(0, listIndex), updatedList, ...this.props.currentBoard.lists.slice(listIndex+1)];
     this.setState({lists});
+    this.setState({id:this.props.currentBoard.id});
+    this.setState({name:this.props.currentBoard.name});
+
+    this.props.currentBoard.lists = lists;
     this.saveBoard();
   }
 
@@ -108,21 +127,13 @@ class Board extends Component {
     this.setState({addListTitle: event.target.value});
   }
 
-  mapStateToPropsList(listId, state) {
-    
-  }
-
-  mapDispatchToPropsList(listId, dispatch) {
-    
-  }
-
   render() {
-    const lists = this.props.currentBoard ? this.props.currentBoard.lists : [];
+    const currentBoard = this.props.currentBoard || {'lists': []};
 
     return (
       <Fragment>
         <div style={styles.flexContainer}>
-          {lists.map(list => (
+          {currentBoard.lists.map(list => (
             <List
               styles={styles.flexItem}
               key={list.id}
@@ -165,10 +176,4 @@ const mapStateToProps = (state) => ({
   currentBoard: state.currentBoard
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getCurrentBoard: (boardId) => dispatch({
-    type: 'GET_CURRENT_BOARD',
-    payload: {boardId}})
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Board);
+export default connect(mapStateToProps) (Board);
