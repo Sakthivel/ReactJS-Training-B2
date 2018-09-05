@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UserInputSection from './components/UserInputSection';
-import ChattingSection from './components/ChattingSection';
+import UserInputSection from './components/Login';
+import ChattingSection from './components/Chat';
 import {connect} from 'react-redux';
 
 class App extends Component {

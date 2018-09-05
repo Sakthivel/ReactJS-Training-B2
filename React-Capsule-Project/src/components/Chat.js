@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Chatkit from '@pusher/chatkit';
-import ChatWindow from './ChatWindow';
+import ChatWindow from './ChatBox';
 import UsersList from './UsersList';
 import SendMessageForm from './SendMessageForm';
 import { withStyles } from '@material-ui/core/styles';
@@ -78,7 +78,6 @@ class ChattingSection extends Component {
 
     createRoom(e) {
         e.preventDefault();
-        alert('Functionality under development');
     }
 
     render() {
