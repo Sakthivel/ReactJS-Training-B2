@@ -6,8 +6,8 @@ const Chatkit = require('pusher-chatkit-server')
 const app = express()
 
 const chatkit = new Chatkit.default({
-  instanceLocator: 'v1:us1:3e937575-3d1a-4604-bc09-190f79f02b60',
-  key: 'a4108db0-88ca-42ac-8c6b-f4d234d55bef:FHmNyXy8spkYFhwj/tvn4stO1bSOYSLU/HY79N6Cixo=',
+  instanceLocator: 'v1:us1:f3b4d9d2-eb2b-412a-9fba-b5885cebb3b8',
+  key: 'cb0291f3-5dcd-41bd-a09f-53286bc3c6c2:CNr5D3Bl3GMNbsSpeXFKFJXceNpl7k5p1YXJCYkz1lM=',
 })
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -17,9 +17,9 @@ app.use(cors())
 app.post('/users', (req, res) => {
   const { username } = req.body
   chatkit
-  .createUser({ 
-  id: username, 
-  name: username 
+  .createUser({
+  id: username,
+  name: username
   })
   .then(() => res.sendStatus(201))
   .catch(error => {

@@ -1,6 +1,20 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {createStore, applyMiddleware} from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import {Provider} from 'react-redux';
+import sagas from './sagas';
 
-ReactDOM.render(<App />, document.getElementById('root'))
+import App from './App';
+import CapsuleApp from './CapsuleApp';
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(CapsuleApp, {
+    screen : ''
+}, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(sagas);
+
+ReactDOM.render((<Provider store={store}>
+    <App />
+</Provider>), document.getElementById('root'));
