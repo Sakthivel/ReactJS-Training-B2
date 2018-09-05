@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Chatkit from '@pusher/chatkit';
 import ChatWindow from './ChatBox';
 import UsersList from './UsersList';
@@ -82,7 +82,7 @@ class ChattingSection extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            <Fragment>
                 <Grid container spacing={24}>
                     <Grid item xs={8}>
                         <div  ref='scroll' style={styles.chatWindow}>
@@ -107,7 +107,7 @@ class ChattingSection extends Component {
                         />
                     </Grid>
                 </Grid>
-            </React.Fragment>
+            </Fragment>
         )
     }
 }
