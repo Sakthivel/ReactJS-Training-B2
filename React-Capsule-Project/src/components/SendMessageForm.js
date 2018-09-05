@@ -27,7 +27,7 @@ class SendMessageForm extends Component {
 
     onChangeHandler(e) {
         this.setState({ text: e.target.value });
-        
+
         if (this.props.onChange) {
             this.props.onChange();
         }
@@ -39,7 +39,7 @@ class SendMessageForm extends Component {
             <form onSubmit={this.onSubmitHandler.bind(this)}>
                 <input style={styles.chatText}
                     type="text"
-                    placeholder="Type message & hit ENTER"
+                    placeholder="Leave your messages here.."
                     onChange={this.onChangeHandler.bind(this)}
                     value={this.state.text}
                 />

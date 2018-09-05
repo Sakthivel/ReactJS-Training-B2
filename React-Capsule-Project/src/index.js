@@ -6,10 +6,10 @@ import {Provider} from 'react-redux';
 import sagas from './sagas';
 
 import App from './App';
-import CapsuleApp from './CapsuleApp';
+import TalkingApp from './TalkingApp';
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(CapsuleApp, {
+const store = createStore(TalkingApp, {
     screen : ''
 }, applyMiddleware(sagaMiddleware));
 

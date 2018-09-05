@@ -25,20 +25,6 @@ class App extends Component {
       username
     });
 
-    // fetch('http://localhost:3001/users', {
-    //   method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ username }),
-    //   })
-    //   .then(response => {
-    //     this.setState({
-    //       username: username,
-    //       screen: 'ChattingSection'
-    //     })
-    //   })
-    //   .catch(error => console.error('error', error))
   }
 
   render() {

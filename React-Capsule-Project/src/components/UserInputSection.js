@@ -34,16 +34,16 @@ class UserInputSection extends Component {
         return (
             <section style={styles.section}>
                 <form onSubmit={this.onSubmit.bind(this)} >
-                    <Typography variant="title" color="inherit">capsule-chat</Typography>
+                    <Typography variant="title" color="inherit">Talking App Login</Typography>
                     <TextField
                         id="name"
-                        label="Enter the User name"
+                        label="Username"
                         onChange={this.onChange.bind(this)}
                         margin="normal"
                         />
                         <Button onClick={this.onSubmit.bind(this)} variant="outlined" color="primary" >
                             Submit
-                        </Button> 
+                        </Button>
                 </form>
             </section>
         )
