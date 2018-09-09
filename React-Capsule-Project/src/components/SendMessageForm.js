@@ -42,6 +42,7 @@ class SendMessageForm extends Component {
                     placeholder="Leave your messages here.."
                     onChange={this.onChangeHandler.bind(this)}
                     value={this.state.text}
+                    id="message"
                 />
             </form>
         )

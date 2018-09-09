@@ -3,26 +3,19 @@ import Chatkit from '@pusher/chatkit';
 import ChatWindow from './ChatBox';
 import UsersList from './UsersList';
 import SendMessageForm from './SendMessageForm';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
 import Grid from '@material-ui/core/Grid';
 
 const styles = {
     chatWindow : {
-        background: '#eee',
+        background: '#fff',
         height: '515px',
         overflowY: 'auto',
-        border: '1px solid #ddd',
+        border: '1px solid #007bb2',
         padding: '12px'
-    },
-    button : {
-        background: '#2196f3',
-        color: '#fff'
     }
   };
 
-class ChattingSection extends Component {
+class Chat extends Component {
     constructor (props) {
         super();
 
@@ -76,14 +69,16 @@ class ChattingSection extends Component {
         .catch(error => console.error('error', error))
     }
 
-    createRoom(e) {
-        e.preventDefault();
-    }
-
     render() {
         return (
             <Fragment>
                 <Grid container spacing={24}>
+                    <Grid item xs={4}>
+                        <UsersList 
+                            currentUser={this.state.currentUser}
+                            users={this.state.currentRoom.users}
+                        />
+                    </Grid>
                     <Grid item xs={8}>
                         <div  ref='scroll' style={styles.chatWindow}>
                             <ChatWindow
@@ -95,21 +90,11 @@ class ChattingSection extends Component {
                             />
 
                     </Grid>
-                    <Grid item xs={4}>
-                        <Button style={styles.button} onClick={this.createRoom.bind(this)} variant="extendedFab" aria-label="Create Room">
-                            <AddIcon />
-                            Create Room
-                        </Button>
-
-                        <UsersList
-                            currentUser={this.state.currentUser}
-                            users={this.state.currentRoom.users}
-                        />
-                    </Grid>
+                    
                 </Grid>
             </Fragment>
         )
     }
 }
 
-export default ChattingSection;
+export default Chat;

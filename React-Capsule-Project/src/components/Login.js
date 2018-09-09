@@ -4,17 +4,10 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 
-const styles = {
-    section : {
-        margin: '4em auto',
-        width: '100%',
-        maxWidth: '1040px'
-    }
-}
 
-class UserInputSection extends Component {
+class Login extends Component {
     constructor(props) {
-        super(props);
+        super();
 
         this.state = {
             username: '',
@@ -32,22 +25,27 @@ class UserInputSection extends Component {
 
     render() {
         return (
-            <section style={styles.section}>
-                <form onSubmit={this.onSubmit.bind(this)} >
-                    <Typography variant="title" color="inherit">Talking App Login</Typography>
-                    <TextField
-                        id="name"
-                        label="Username"
-                        onChange={this.onChange.bind(this)}
-                        margin="normal"
-                        />
-                        <Button onClick={this.onSubmit.bind(this)} variant="outlined" color="primary" >
-                            Submit
-                        </Button>
-                </form>
-            </section>
+             <Grid container spacing={24}>
+                <Grid item xs={4}>
+                    <h1>Talking App</h1>
+                </Grid>
+                <Grid item xs={8}>
+                        <form onSubmit={this.onSubmit.bind(this)} >
+                            <Typography variant="title" color="inherit">Login</Typography>
+                            <TextField
+                                id="name"
+                                label="Username"
+                                onChange={this.onChange.bind(this)}
+                                margin="normal"
+                                />
+                            <Button onClick={this.onSubmit.bind(this)} variant="outlined" color="primary" >
+                                Submit
+                            </Button>
+                        </form>
+                </Grid>
+            </Grid>
         )
     }
 }
 
-export default UserInputSection;
+export default Login;

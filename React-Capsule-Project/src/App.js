@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UserInputSection from './components/Login';
-import ChattingSection from './components/Chat';
+import Login from './components/Login';
+import Chat from './components/Chat';
 import {connect} from 'react-redux';
 
 class App extends Component {
@@ -31,10 +31,10 @@ class App extends Component {
     const screen_ = this.props.screen || '';
     const username_ = this.props.username || '';
     if (screen_ === '') {
-      return <UserInputSection onSubmit={this.onUserEntry} />
+      return <Login onSubmit={this.onUserEntry} />
     }
     if (screen_ === 'ChattingSection') {
-      return <ChattingSection username={username_} />
+      return <Chat username={username_} />
     }
   }
 }

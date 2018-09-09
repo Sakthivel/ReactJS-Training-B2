@@ -5,11 +5,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 const styles = {
   list : {
-    background: '#eee',
+    background: '#00b0ff',
     cursor: 'default'
   },
   highlighted : {
-    background: '#ddd',
+    background: '#007bb2',
     cursor: 'default'
   }
 }
@@ -35,7 +35,7 @@ class UsersList extends Component {
         })}
       </List>
     } else {
-      return <p>Loading...</p>
+      return <p>Loading User...</p>
     }
   }
 }

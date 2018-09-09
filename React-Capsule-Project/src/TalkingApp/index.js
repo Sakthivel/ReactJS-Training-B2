@@ -1,4 +1,4 @@
-function CapsuleApp(currState, action) {
+function TalkingApp(currState, action) {
 
   switch(action.type) {
     case 'GET_USERNAME':
@@ -17,4 +17,4 @@ function CapsuleApp(currState, action) {
   }
 }
 
-module.exports = CapsuleApp;
+module.exports = TalkingApp;
