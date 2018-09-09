@@ -1,5 +1,5 @@
 import React from 'react';
-import SendMessageForm from './SendMessageForm';
+import SendMessageForm from '../SendMessageForm';
 import {
     configure,
     shallow,
