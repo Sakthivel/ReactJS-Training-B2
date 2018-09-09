@@ -1,5 +1,5 @@
 import { createStore }  from 'redux';
-import TalkingApp from '.';
+import TalkingApp from '../';
 const should = require('chai').should();
 
 describe('TalkingApp unit testing', function() {
