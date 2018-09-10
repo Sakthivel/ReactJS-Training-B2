@@ -95,4 +95,31 @@ describe('TalkingApp unit testing', function() {
     expect(messageText).to.equal('NEW ROOM HAS CREATED!!');
   });
 
+  it('should SET_NEW_USER', function() {
+
+    const currState = {
+        username: 'sakthi',
+    };
+
+    const store = createStore(TalkingApp, currState);
+
+    const action = {
+      type: 'SET_NEW_USER',
+      roomId: '123',
+      user: 'hello'
+    };
+
+    store.dispatch(action);
+
+    const messageText = store.getState().messages[0].text;
+
+    store.getState().should.have.property('username');
+    store.getState().should.have.property('screen');
+    store.getState().should.have.property('messages');
+    store.getState().should.have.property('username').and.equal('sakthi');
+    store.getState().should.have.property('screen').and.equal('Chat');
+    store.getState().should.have.property('messages').to.be.a('array');
+    expect(messageText).to.equal('NEW USER HAS ADDED HERE!!');
+  });
+
 });

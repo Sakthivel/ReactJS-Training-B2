@@ -22,7 +22,6 @@ export function getCurrentUser(username) {
 export function userMessage(action) {
     return action.currentUser.fetchMessages({
         roomId: action.roomId,
-        direction: 'older',
         limit: 100,
     })
     .then(messages => new Promise((resolve, reject) => {
@@ -36,7 +35,8 @@ export function userMessage(action) {
 export function newChatRoom(action) {
     return action.currentUser.createRoom({
         name: action.roomName,
-        private: true
+        private: true,
+        user_ids: action.currentUser.id
     })
     .then(room => new Promise((resolve, reject) => {
         resolve(room)
@@ -44,4 +44,17 @@ export function newChatRoom(action) {
     .catch(err => {
         console.error(`Error in newChatRoom: ${err}`)
     }))
+}
+
+export function addNewUser(action) {
+    return action.currentUser.addUserToRoom({
+        userId: action.user,
+        roomId: action.roomId
+    })
+      .then(() => {
+        console.log('Added keith to room 123')
+      })
+      .catch(err => {
+        console.log(`Error adding keith to room 123: ${err}`)
+      })
 }

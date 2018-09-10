@@ -24,6 +24,9 @@ const styles = {
         width: '395px',
         marginLeft: '33%',
         padding: '20px'
+    },
+    userModal: {
+        marginTop: '15px'
     }
   };
 
@@ -46,7 +49,9 @@ class Chat extends Component {
             update: true,
             newRoom: true,
             openModal: false,
-            newRoomName: ''
+            openUserModal: false,
+            newRoomName: '',
+            newUserName: ''
         }
 
         this.sendMessage = this.sendMessage.bind(this);
@@ -104,6 +109,31 @@ class Chat extends Component {
         this.setState({ openModal: false });
     }
 
+    newUserName(e) {
+        this.setState({ newUserName: e.target.value });
+    }
+
+    addUser(e) {
+        e.preventDefault();
+        if (this.state.newUserName !=='') {
+            this.props.dispatch({
+                type: 'GET_NEW_USER',
+                currentUser: this.props.currentUser,
+                roomId: this.props.roomId || 15456697,
+                user: this.state.newUserName
+            });
+            this.handleCloseUser();
+        }
+    }
+
+    handleOpenUser() {
+        this.setState({ openUserModal: true });
+    }
+
+    handleCloseUser() {
+        this.setState({ openUserModal: false });
+    }
+
     render() {
         const currentUser = this.props.currentUser || {};
         const users = currentUser ? currentUser.users : [];
@@ -140,8 +170,12 @@ class Chat extends Component {
 
                     </Grid>
                     <Grid item xs={4}>
-                        <Button variant="contained" color="primary" onClick={this.handleOpen.bind(this)} aria-label="Create Room">
+                        <Button variant="contained" fullWidth color="primary" onClick={this.handleOpen.bind(this)} aria-label="Create Room">
                             Create Room
+                        </Button>
+                        <br/>
+                        <Button style={styles.userModal} variant="contained" fullWidth color="primary" onClick={this.handleOpenUser.bind(this)} aria-label="Add User">
+                            Add New User
                         </Button>
 
                         <Modal aria-labelledby="simple-modal-title"
@@ -160,6 +194,30 @@ class Chat extends Component {
                                   fullWidth
                                 />
                                 <Button onClick={this.addRoom.bind(this)}
+                                    variant="raised"
+                                    fullWidth
+                                    color="primary" >
+                                    Submit
+                                </Button>
+                          </div>
+                        </Modal>
+
+                        <Modal aria-labelledby="simple-modal-title"
+                               aria-describedby="simple-modal-description"
+                               open={this.state.openUserModal}
+                               onClose={this.handleCloseUser.bind(this)}>
+                          <div style={styles.modal}>
+                                <Typography variant="title" id="modal-title">
+                                  Add User to Room
+                                </Typography>
+                                <TextField
+                                  id="newUser"
+                                  label="Add User to Roome"
+                                  onChange={this.newUserName.bind(this)}
+                                  margin="normal"
+                                  fullWidth
+                                />
+                                <Button onClick={this.addUser.bind(this)}
                                     variant="raised"
                                     fullWidth
                                     color="primary" >
