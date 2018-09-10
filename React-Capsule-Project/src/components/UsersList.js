@@ -4,21 +4,24 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 const styles = {
-  list : {
-    background: '#00b0ff',
-    cursor: 'default'
-  },
-  highlighted : {
-    background: '#007bb2',
-    cursor: 'default'
-  }
+    wrapper: {
+        padding: '10px'
+    },
+    list: {
+        background: '#00b0ff',
+        cursor: 'default'
+    },
+    highlighted: {
+        background: '#007bb2',
+        cursor: 'default'
+    }
 }
 
 class UsersList extends Component {
 
   render() {
     if (this.props.users) {
-      return  <List component="nav">
+      return  <List component="nav" style={styles.wrapper}>
         {this.props.users.map((user, index) => {
           if (user.id === this.props.currentUser.id) {
             return (

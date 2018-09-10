@@ -33,7 +33,7 @@ class App extends Component {
     if (screen_ === '') {
       return <Login onSubmit={this.onUserEntry} />
     }
-    if (screen_ === 'ChattingSection') {
+    if (screen_ === 'Chat') {
       return <Chat username={username_} />
     }
   }

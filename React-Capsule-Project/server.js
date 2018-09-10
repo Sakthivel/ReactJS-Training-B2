@@ -41,6 +41,6 @@ app.listen(PORT, err => {
   if (err) {
     console.error(err)
   } else {
-    console.log(`Running on port ${PORT}`)
+    console.error(`Running on port ${PORT}`)
   }
 })
