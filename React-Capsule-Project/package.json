@@ -25,7 +25,11 @@
     "redux-saga": "^0.16.0"
   },
   "devDependencies": {
-    "concurrently": "^3.5.1"
+    "concurrently": "^3.5.1",
+    "eslint": "^5.2.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0"
   },
   "scripts": {
     "start": "concurrently \"node ./server.js\" \"react-scripts start\"",
