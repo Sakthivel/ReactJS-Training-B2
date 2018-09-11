@@ -126,6 +126,15 @@ class Chat extends Component {
         }
     }
 
+    removeUserFromRoom(e) {
+        e.preventDefault();
+        this.props.dispatch({
+            type: 'GET_REMOVE_USER',
+            currentUser: this.props.currentUser,
+            roomId: this.props.roomId || 15456697
+        });
+    }
+
     handleOpenUser() {
         this.setState({ openUserModal: true });
     }
@@ -139,7 +148,7 @@ class Chat extends Component {
         const users = currentUser ? currentUser.users : [];
         const messages = this.props.messages || [];
 
-        if(users && users.length && (this.state.update === true || this.state.newRoom === true ) ){
+        if(users && users.length && (this.state.update === true || this.state.newRoom === true) ){
             this.props.dispatch({
                 type: 'GET_MESSAGE',
                 roomId: this.props.roomId || 15456697,
@@ -175,7 +184,11 @@ class Chat extends Component {
                         </Button>
                         <br/>
                         <Button style={styles.userModal} variant="contained" fullWidth color="primary" onClick={this.handleOpenUser.bind(this)} aria-label="Add User">
-                            Add New User
+                            Add User into Room
+                        </Button>
+
+                        <Button style={styles.userModal} variant="contained" fullWidth color="primary" onClick={this.removeUserFromRoom.bind(this)} aria-label="Remove User">
+                            Leave From Room
                         </Button>
 
                         <Modal aria-labelledby="simple-modal-title"
@@ -208,11 +221,11 @@ class Chat extends Component {
                                onClose={this.handleCloseUser.bind(this)}>
                           <div style={styles.modal}>
                                 <Typography variant="title" id="modal-title">
-                                  Add User to Room
+                                  Add User into Room
                                 </Typography>
                                 <TextField
                                   id="newUser"
-                                  label="Add User to Roome"
+                                  label="Add User into Room"
                                   onChange={this.newUserName.bind(this)}
                                   margin="normal"
                                   fullWidth
@@ -239,4 +252,4 @@ const mapStateToProps = (state) => ({
     roomId: state.roomId
 });
 
-export default  connect(mapStateToProps) (Chat);
+export default connect(mapStateToProps) (Chat);

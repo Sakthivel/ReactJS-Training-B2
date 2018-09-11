@@ -58,6 +58,18 @@ function TalkingApp(currState, action) {
                 roomId: currState.roomId
             })
 
+        case 'SET_REMOVE_USER':
+            return Object.assign({}, {
+                screen: 'Chat',
+                username: currState.username,
+                currentUser: currState.currentUser,
+                messages: [{
+                    text: 'YOU ARE LEFT THE ROOM!!',
+                    senderId: ''
+                }],
+                roomId: currState.roomId
+            })
+
         default:
         return currState;
   }

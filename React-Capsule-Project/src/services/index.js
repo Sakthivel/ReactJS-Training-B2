@@ -22,6 +22,7 @@ export function getCurrentUser(username) {
 export function userMessage(action) {
     return action.currentUser.fetchMessages({
         roomId: action.roomId,
+        direction: 'older',
         limit: 100,
     })
     .then(messages => new Promise((resolve, reject) => {
@@ -51,10 +52,24 @@ export function addNewUser(action) {
         userId: action.user,
         roomId: action.roomId
     })
-      .then(() => {
-        console.log('Added keith to room 123')
+    .then(() => {
+        console.log(`Added ${action.user} to room 123`)
+    })
+    .catch(err => {
+        console.log(`Error adding ${action.user} to room: ${err}`)
+    })
+}
+
+export function leaveUserFromRoom(action) {
+    action.currentUser.leaveRoom({ roomId: action.roomId })
+      .then(room => {
+        console.log(`Left room with ID: ${action.roomId}`)
       })
       .catch(err => {
-        console.log(`Error adding keith to room 123: ${err}`)
+        console.log(`Error leaving room ${action.roomId}: ${err}`)
       })
+
+    action.currentUser.disconnect();
+
+    return true;
 }

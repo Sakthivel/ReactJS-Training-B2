@@ -1,6 +1,6 @@
 import { takeLatest, takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects'
-import { getUserName, getCurrentUser, userMessage, newChatRoom, addNewUser } from './services';
+import { getUserName, getCurrentUser, userMessage, newChatRoom, addNewUser, leaveUserFromRoom } from './services';
 
 function* getUserNameSaga(action) {
     const username = yield call(getUserName, action.username);
@@ -27,10 +27,16 @@ function* addNewUserSaga(action) {
     yield put({ type: 'SET_NEW_USER', user });
 }
 
+function* removeUserSaga(action) {
+    const user = yield call(leaveUserFromRoom, action);
+    yield put({ type: 'SET_REMOVE_USER', user });
+}
+
 export default function* sagas() {
     yield takeLatest('GET_USERNAME', getUserNameSaga);
     yield takeLatest('GET_CURRENT_USER', getCurrentUserSaga);
     yield takeLatest('GET_MESSAGE', userMessageSaga);
     yield takeLatest('GET_NEW_ROOM', newChatRoomSaga);
     yield takeEvery('GET_NEW_USER', addNewUserSaga);
+    yield takeEvery('GET_REMOVE_USER', removeUserSaga);
 }
