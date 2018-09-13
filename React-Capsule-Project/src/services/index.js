@@ -1,8 +1,10 @@
 import axios from 'axios';
 import Chatkit from '@pusher/chatkit';
 
+const hostName = 'http://' + window.location.hostname + ':3001';
+
 export function getUserName(username) {
-    return axios.post('http://localhost:3001/users',{ username }).then(result => new Promise((resolve, reject) => {
+    return axios.post(hostName + '/users',{ username }).then(result => new Promise((resolve, reject) => {
         resolve(username);
     })).catch(error => {return username})
 }
@@ -12,7 +14,7 @@ export function getCurrentUser(username) {
         instanceLocator: 'v1:us1:f3b4d9d2-eb2b-412a-9fba-b5885cebb3b8',
         userId: username,
         tokenProvider: new Chatkit.TokenProvider({
-            url: 'http://localhost:3001/authenticate'
+            url: hostName + '/authenticate'
         })
     }).connect().then(currentUser => new Promise((resolve, reject) => {
         resolve(currentUser)
