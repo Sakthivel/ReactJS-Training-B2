@@ -1,118 +1,108 @@
 {
-  "boardsList": [
-    {
-      "id": 1,
-      "name": "Core JavaScript"
-    }
-  ],
-  "board": [
-    {
-      "id": 1,
-      "name": "Core JavaScript",
-      "lists": [
-        {
-          "id": 12,
-          "name": "Sprint Backlog",
-          "cards": [
-            {
-              "id": 22,
-              "text": "Setup Git Repository"
-            },
-            {
-              "id": 23,
-              "text": "Configure CI / CD with CircleCI and Heroku"
-            },
-            {
-              "id": 24,
-              "text": "Onboard Developers"
-            }
-          ]
-        },
-        {
-          "id": 13,
-          "name": "In Progress",
-          "cards": [
-            {
-              "id": 32,
-              "text": "Setup Git Repository"
-            },
-            {
-              "id": 33,
-              "text": "Configure CI / CD with CircleCI and Heroku"
-            },
-            {
-              "id": 34,
-              "text": "Onboard Developers"
-            }
-          ]
-        },
-        {
-          "id": 14,
-          "name": "Released",
-          "cards": [
-            {
-              "id": 42,
-              "text": "Setup Git Repository"
-            },
-            {
-              "id": 43,
-              "text": "Configure CI / CD with CircleCI and Heroku"
-            },
-            {
-              "id": 44,
-              "text": "Onboard Developersfdsf"
-            },
-            {
-              "id": 126699164.89217938,
-              "text": "Testing Assignment 7"
-            },
-            {
-              "id": 113622559.64670783,
-              "text": "testing"
-            }
-          ]
-        },
-        {
-          "id": 489374251.3680346,
-          "name": "Master",
-          "cards": [
-            {
-              "id": 624422407.6373799,
-              "text": "Branches"
-            },
-            {
-              "id": 421294890.97950995,
-              "text": "gg"
-            },
-            {
-              "id": 370094098.75497174,
-              "text": "ffff"
-            },
-            {
-              "id": 812010337.1797631,
-              "text": "saving"
-            },
-            {
-              "id": 704061993.2027646,
-              "text": "cccc"
-            }
-          ]
-        },
-        {
-          "id": 867061693.7672435,
-          "name": "welcome",
-          "cards": [
-            {
-              "id": "86329120.06501825",
-              "text": "test"
-            },
-            {
-              "id": "34259421.743388325",
-              "text": "testing"
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  "boardsList": [{
+    "id": 1,
+    "name": "Core JavaScript App"
+  }],
+  "board": [{
+    "id": 1,
+    "name": "Core JavaScript",
+    "lists": [{
+        "id": 12,
+        "name": "Sprint Backlog",
+        "cards": [{
+            "id": 22,
+            "text": "Setup Git Repository"
+          },
+          {
+            "id": 23,
+            "text": "Configure CI / CD with CircleCI and Heroku"
+          },
+          {
+            "id": 24,
+            "text": "Onboard Developers"
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "name": "In Progress",
+        "cards": [{
+            "id": 32,
+            "text": "Setup Git Repository"
+          },
+          {
+            "id": 33,
+            "text": "Configure CI / CD with CircleCI and Heroku"
+          },
+          {
+            "id": 34,
+            "text": "Onboard Developers"
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "name": "Released",
+        "cards": [{
+            "id": 42,
+            "text": "Setup Git Repository"
+          },
+          {
+            "id": 43,
+            "text": "Configure CI / CD with CircleCI and Heroku"
+          },
+          {
+            "id": 44,
+            "text": "Onboard Developersfdsf"
+          },
+          {
+            "id": 126699164.89217938,
+            "text": "Testing Assignment 7"
+          },
+          {
+            "id": 113622559.64670783,
+            "text": "testing"
+          }
+        ]
+      },
+      {
+        "id": 489374251.3680346,
+        "name": "Master",
+        "cards": [{
+            "id": 624422407.6373799,
+            "text": "Branches"
+          },
+          {
+            "id": 421294890.97950995,
+            "text": "gg"
+          },
+          {
+            "id": 370094098.75497174,
+            "text": "ffff"
+          },
+          {
+            "id": 812010337.1797631,
+            "text": "saving"
+          },
+          {
+            "id": 704061993.2027646,
+            "text": "cccc"
+          }
+        ]
+      },
+      {
+        "id": 867061693.7672435,
+        "name": "welcome",
+        "cards": [{
+            "id": "86329120.06501825",
+            "text": "test"
+          },
+          {
+            "id": "34259421.743388325",
+            "text": "testing"
+          }
+        ]
+      }
+    ]
+  }]
 }
